@@ -96,6 +96,7 @@ class MMDetWandbHook(WandbLoggerHook):
     def __init__(self,
                  init_kwargs=None,
                  interval=50,
+                 box_metric=True,
                  log_checkpoint=False,
                  log_checkpoint_metadata=False,
                  num_eval_images=100,
@@ -103,6 +104,7 @@ class MMDetWandbHook(WandbLoggerHook):
                  **kwargs):
         super(MMDetWandbHook, self).__init__(init_kwargs, interval, **kwargs)
 
+        self.box_metric = box_metric
         self.log_checkpoint = log_checkpoint
         self.log_checkpoint_metadata = (
             log_checkpoint and log_checkpoint_metadata)
@@ -371,7 +373,10 @@ class MMDetWandbHook(WandbLoggerHook):
             data_ann = self.val_dataset.get_ann_info(idx)
             bboxes = data_ann['bboxes']
             labels = data_ann['labels']
-            masks = None
+            if self.box_metric:
+                masks = None
+            else: 
+                masks = data_ann.get('masks', None)
             # masks = data_ann.get('masks', None)
 
             # Get dict of bounding boxes to be logged.
