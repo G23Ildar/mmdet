@@ -95,7 +95,7 @@ class MMDetWandbHook(WandbLoggerHook):
     def __init__(self,
                  init_kwargs=None,
                  interval=50,
-                 metric = 'bbox',
+                 metric='bbox',
                  log_checkpoint=False,
                  log_checkpoint_metadata=False,
                  num_eval_images=100,
