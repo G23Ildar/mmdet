@@ -104,7 +104,6 @@ class MMDetWandbHook(WandbLoggerHook):
                  **kwargs):
         super(MMDetWandbHook, self).__init__(init_kwargs, interval, **kwargs)
 
-        self.box_metric = box_metric
         self.log_checkpoint = log_checkpoint
         self.log_checkpoint_metadata = (
             log_checkpoint and log_checkpoint_metadata)
